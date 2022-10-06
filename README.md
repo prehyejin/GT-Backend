@@ -4,9 +4,13 @@ server
 
 # git bash 다운로드
 [gitbash 다운로드] (https://git-scm.com/download/win).
+
 깃배시는 리눅스 커널 형식을 윈도우에서 쓰게 해주는 cmd
+
 생각해보니 오빠는 맥이라서 그냥 해도될지도,,?
+
 이걸 설치하면 자동으로 git도 설치해줌
+
 이걸로 깃 커밋을 진행
 
 
