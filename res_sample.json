@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "series_group": 1,
+    "name": "CPA 001",
+    "description": "Group Description",
+    "facilities": [
+      {
+        "id": 4,
+        "series_device": 0,
+        "description": "Sreemonta Description",
+        "location": {
+          "lat": 22.75062,
+          "lon": 88.94773
+        }
+      },
+      {
+        "id": 3,
+        "series_device": 0,
+        "description": "Tegharia Description",
+        "location": {
+          "lat": 22.75062,
+          "lon": 88.94773
+        }
+      },
+      {
+        "id": 1,
+        "series_device": 0,
+        "description": "Kesra Description",
+        "location": {
+          "lat": 22.75062,
+          "lon": 88.94773
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "series_group": 1,
+    "name": "CPA 002",
+    "description": "Group Description",
+    "facilities": [
+      {
+        "id": 5,
+        "series_device": 0,
+        "description": "Sreemonta Description",
+        "location": {
+          "lat": 22.75062,
+          "lon": 88.94773
+        }
+      }
+    ]
+  }
+]
