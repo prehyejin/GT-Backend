@@ -1,8 +1,8 @@
 module.exports = {
-    host: 'ict.gatc.co.kr',
-    username: 'glory',
-    password: 'glory2017!',
-    db: 'glory_tech',
+    host: '#',
+    username: '#',
+    password: '#',
+    db: '#',
     dialect: 'mysql',
     pool: {
         max: 5,
