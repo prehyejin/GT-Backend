@@ -30,8 +30,8 @@ module.exports = (sequelizeConfig, Sequelize) => {
             connection: {
                 type: Sequelize.INTEGER
             },
-            photo: {
-                type: Sequelize.BLOB("long"),
+            img_path: {
+                type: Sequelize.STRING
             },
             description: {
                 type: Sequelize.STRING
