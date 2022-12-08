@@ -21,6 +21,9 @@ router.put('/api/v1/device/:id', deviceController.update);
 // Delete device by id
 router.delete('/api/v1/device/:id', deviceController.delete);
 
+// Retrieve device by name
+router.get('/api/v1/dev_name/:name', deviceController.findByName);
+
 //// GROUP
 // Create group
 router.post('/api/v1/group', groupController.create);

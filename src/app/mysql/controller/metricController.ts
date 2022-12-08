@@ -5,9 +5,30 @@ const Op = db.sequelize.Op;
 // Create metric
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.metric_name) {
+    if (!req.body.topics_id) {
         res.status(400).send({
-            message: 'Metric Name is empty!'
+            message: 'Topic ID is empty!'
+        });
+        return;
+    }
+
+    if (!req.body.topics_alias) {
+        res.status(400).send({
+            message: 'Topic Alias is empty!'
+        });
+        return;
+    }
+
+    if (!req.body.id_device) {
+        res.status(400).send({
+            message: 'Device ID is empty!'
+        });
+        return;
+    }
+
+    if (!req.body.value) {
+        res.status(400).send({
+            message: 'Value is empty!'
         });
         return;
     }

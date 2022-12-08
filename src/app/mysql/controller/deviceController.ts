@@ -67,7 +67,7 @@ exports.findAll = (req, res) => {
                 ]
             }
         }
-    };
+    }
 
     Device
         .findAll(condition)
@@ -94,6 +94,35 @@ exports.findOne = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: err.message || 'Retrieve device failure. (id: ' + id + ')'
+            });
+        });
+};
+
+// Retrieve device by id
+exports.findByName = (req, res) => {
+    const name = req.params.name;
+
+    let condition = { where: {} };
+
+    if (name) {
+        condition = {
+            where : {
+                device_name: {
+                    [Op.like]: `%${name}%`
+                }
+            }
+        };
+    }
+
+    Device
+        .findAll(condition)
+        .then(data => {
+            console.log(data);
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || 'Retrieve all devices failure.'
             });
         });
 };

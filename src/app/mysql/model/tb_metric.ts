@@ -3,7 +3,6 @@ module.exports = (sequelizeConfig, Sequelize) => {
     const Metric = sequelizeConfig.define(
         'tb_metric',
         {
-            updatedAt: false,
             topics_id: {
                 type: Sequelize.STRING
             },
@@ -16,6 +15,9 @@ module.exports = (sequelizeConfig, Sequelize) => {
             value: {
                 type: Sequelize.STRING
             },
+        },
+        {
+            updatedAt: false
         }
     );
 
