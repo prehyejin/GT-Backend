@@ -65,5 +65,14 @@ router.get('/api/v1/status', visualController.statusAll);
 // Retrieve Status Value by ID
 router.get('/api/v1/status/:id', visualController.statusOne);
 
+// Retrieve Chart Data
+router.get('/api/v1/chart', visualController.chart);
+
+
+// Test
+router.get('/districts', visualController.statusAll);
+router.get('/facilityCardList', visualController.facilityCardList);
+router.get('/allAboutFacility', visualController.chart);
+router.get('/waterGraph', visualController.waterGraph);
 
 module.exports = router;

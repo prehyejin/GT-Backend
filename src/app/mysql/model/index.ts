@@ -34,5 +34,7 @@ db.metric = require('./tb_metric.ts')(sequelizeConfig, Sequelize);
 db.topic = require('./tb_topic.ts')(sequelizeConfig, Sequelize);
 
 db.group.hasMany(db.device, { foreignKey: "id_group" });
+db.device.hasMany(db.metric, { foreignKey: "id_device" });
+//db.topic.hasMany(db.metric, { foreignKey: ["topic_id", "topic_alias"] })
 
 module.exports = db;
