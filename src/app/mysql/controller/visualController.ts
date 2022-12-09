@@ -212,7 +212,7 @@ exports.chart = (req, res) => {
         req.query.facilityId = 1;
     }
     if(!req.query.timeunit) {
-        req.query.timeunit = "HOUR";
+        req.query.timeunit = "hour";
     }
     if(!req.query.time) {
         req.query.time = new Date().toISOString().slice(0, 10);
@@ -222,9 +222,9 @@ exports.chart = (req, res) => {
     const timeunit = req.query.timeunit;
     const timeString = req.query.time;
 
-    console.log(facilityId);
-    console.log(timeunit);
-    console.log(timeString);
+    //console.log(facilityId);
+    //console.log(timeunit);
+    //console.log(timeString);
 
     var result = {};
 
@@ -336,31 +336,36 @@ exports.chart = (req, res) => {
                     });
                     return;
                 });
+
+            return data;
         })
         .then(data => {
             let minTime, maxTime;
+            const year_month_day = timeString.split("-");
+            console.log(timeString);
             if (timeunit == "hour") {
                 // time: "2022-12-01"
-                const year_month_day = timeString.split("-");
-                maxTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]), Number(year_month_day[2]) + 1, 0);
-                minTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]), Number(year_month_day[2]), 0);
+                maxTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]) - 1, Number(year_month_day[2]) + 1, 0);
+                minTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]) - 1, Number(year_month_day[2]), 0);
             } else if (timeunit == "day") {
                 // time: "2022-12"
-                const year_month = timeString.split("-");
-                maxTime = new Date(Number(year_month[0]), Number(year_month[1]) + 1, 1);
-                minTime = new Date(Number(year_month[0]), Number(year_month[1]), 1);
+                maxTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]), 1);
+                minTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]) - 1, 1);
             } else if (timeunit == "month") {
                 // time: "2022"
-                maxTime = new Date(Number(timeString) + 1,1);
-                minTime = new Date(Number(timeString),1);
+                maxTime = new Date(Number(year_month_day) + 1,0);
+                minTime = new Date(Number(year_month_day),0);
             }
 
             console.log("minTime: " + minTime.toString());
             console.log("maxTime: " + maxTime.toString());
 
+            //console.log(data);
+
             let condition_chart = {
                 where: {
                     id_device: data.id,
+                    topics_alias: "FLOW_TREATED",
                     createdAt: {
                         [Op.lt]: maxTime,
                         [Op.gt]: minTime
@@ -370,8 +375,71 @@ exports.chart = (req, res) => {
             };
 
             Metric.findAll(condition_chart)
-                .then(data => {
-                    result['chart'] = data;
+                .then(metrics => {
+                    //console.log(metrics);
+
+                    const coord_list = [];
+
+                    // Calculating the Average by timeunit
+                    if (timeunit == "hour") {
+                        for (let hr = 0; hr < 24; hr++) {
+                            let sum_value = 0, cnt = 0;
+                            for (const metric of metrics) {
+                                if (hr == new Date(metric.createdAt).getHours()) {
+                                    sum_value += metric.value;
+                                    cnt++;
+                                }
+                            }
+                            if (cnt != 0) {
+                                coord_list.push({
+                                    x: hr,
+                                    y: sum_value / cnt
+                                });
+                            }
+                        }
+                    } else if (timeunit == "day") {
+                        const daysInMonth = new Date(Number(year_month_day[0]), Number(year_month_day[1]) - 1, 0).getDate();
+                        for (let day = 1; day < daysInMonth; day++) {
+                            let sum_value = 0, cnt = 0;
+                            for (const metric of metrics) {
+                                if (day == new Date(metric.createdAt).getDay()) {
+                                    sum_value += metric.value;
+                                    cnt++;
+                                }
+                            }
+                            if (cnt != 0) {
+                                coord_list.push({
+                                    x: day,
+                                    y: sum_value / cnt
+                                });
+                            }
+                        }
+                    } else if (timeunit == "month") {
+                        for (let month = 0; month < 12; month++) {
+                            let sum_value = 0, cnt = 0;
+                            for (const metric of metrics) {
+                                if (month == new Date(metric.createdAt).getMonth()) {
+                                    sum_value += metric.value;
+                                    cnt++;
+                                }
+                            }
+                            if (cnt != 0) {
+                                coord_list.push({
+                                    x: month,
+                                    y: sum_value / cnt
+                                });
+                            }
+                        }
+                    }
+
+                    console.log(coord_list);
+
+                    result['waterGraphData'] = {
+                        timeunit: timeunit,
+                        time: timeString,
+                        coordinates: coord_list
+                    };
+
                     res.send(result);
                 })
                 .catch(err => {
