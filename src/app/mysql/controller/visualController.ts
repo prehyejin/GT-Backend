@@ -267,7 +267,7 @@ exports.chart = (req, res) => {
                 .then(metrics => {
                     for (const metric of metrics) {
                         //console.log(metric);
-                        console.log(metric.topics_alias);
+                        //console.log(metric.topics_alias);
                         switch (metric.topics_alias) {
                             case "FLOW_TREATED":
                                 if (findFlag["flow_treated"] == 0) {
@@ -342,7 +342,7 @@ exports.chart = (req, res) => {
         .then(data => {
             let minTime, maxTime;
             const year_month_day = timeString.split("-");
-            console.log(timeString);
+            //console.log(timeString);
             if (timeunit == "hour") {
                 // time: "2022-12-01"
                 maxTime = new Date(Number(year_month_day[0]), Number(year_month_day[1]) - 1, Number(year_month_day[2]) + 1, 0);
@@ -357,8 +357,8 @@ exports.chart = (req, res) => {
                 minTime = new Date(Number(year_month_day),0);
             }
 
-            console.log("minTime: " + minTime.toString());
-            console.log("maxTime: " + maxTime.toString());
+            console.log("Search minTime: " + minTime.toString());
+            console.log("Search maxTime: " + maxTime.toString());
 
             //console.log(data);
 
@@ -432,12 +432,12 @@ exports.chart = (req, res) => {
                         }
                     }
 
-                    console.log(coord_list);
+                    //console.log(coord_list);
 
                     result['waterGraphData'] = {
                         timeunit: timeunit,
                         time: timeString,
-                        coordinates: coord_list
+                        data: coord_list
                     };
 
                     res.send(result);
