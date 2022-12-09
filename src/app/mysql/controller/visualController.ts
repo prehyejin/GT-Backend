@@ -235,7 +235,7 @@ exports.chart = (req, res) => {
                 districtId: data.id_group,
                 facilityId: data.id,
                 facilityName: data.device_name,
-                connection: data.connection,
+                connection: !!data.connection,
                 location: {
                     lat: data.latitude,
                     lon: data.longitude,
@@ -285,28 +285,28 @@ exports.chart = (req, res) => {
                                 break;
                             case "LVLSW_RAW":
                                 if (findFlag["lvlsw_raw"] == 0) {
-                                    result["rawLevelSwitch"] = metric.value;
+                                    result["rawLevelSwitch"] = !!metric.value;
                                     findFlag["lvlsw_raw"] = 1;
                                     flagCount++;
                                 }
                                 break;
                             case "LVLSW_DRINK":
                                 if (findFlag["lvlsw_drink"] == 0) {
-                                    result["drinkLevelSwitch"] = metric.value;
+                                    result["drinkLevelSwitch"] = !!metric.value;
                                     findFlag["lvlsw_drink"] = 1;
                                     flagCount++;
                                 }
                                 break;
                             case "PUMP_RO":
                                 if (findFlag["pump_ro"] == 0) {
-                                    result["roPump"] = metric.value;
+                                    result["roPump"] = !!metric.value;
                                     findFlag["pump_ro"] = 1;
                                     flagCount++;
                                 }
                                 break;
                             case "PUMP_FEED":
                                 if (findFlag["pump_feed"] == 0) {
-                                    result["feedPump"] = metric.value;
+                                    result["feedPump"] = !!metric.value;
                                     findFlag["pump_feed"] = 1;
                                     flagCount++;
                                 }
