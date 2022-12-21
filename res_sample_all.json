@@ -1,0 +1,33 @@
+{
+  districtId: 1,
+  districtName: "CPA 005",
+  facilityId: 1,
+  facilityName: "Kesra",
+  connection: true,
+  location: {
+    lat: 22.75062,
+    lon: 88.94773,
+  },
+  concentratedFlowRate: 12,
+  treatedFlowRate: 8,
+  waterGraphData: {
+    timeunit: "hour",
+    time: "2022-11-19",
+    data: [
+      {
+        x: 0,
+        y: 0,
+      },
+      {
+        x: 2,
+        y: 0,
+      }
+    ],
+  },
+  rawLevelSwitch: true,
+  feedPump: false,
+  roPump: true,
+  drinkLevelSwitch: false,
+  treatedWaterConductivity: 12,
+  treatedWaterPH: 10,
+}
