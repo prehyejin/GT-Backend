@@ -8,15 +8,17 @@
       {
         "id": 4,
         "series_device": 0,
+        "name": "Sreemonta",
         "description": "Sreemonta Description",
         "location": {
-          "lat": 22.75062,
-          "lon": 88.94773
+          "lat": 11,
+          "lon": 11
         }
       },
       {
         "id": 3,
         "series_device": 0,
+        "name": "Tegharia",
         "description": "Tegharia Description",
         "location": {
           "lat": 22.75062,
@@ -26,6 +28,7 @@
       {
         "id": 1,
         "series_device": 0,
+        "name": "Kesra",
         "description": "Kesra Description",
         "location": {
           "lat": 22.75062,
@@ -43,6 +46,7 @@
       {
         "id": 5,
         "series_device": 0,
+        "name": "Sreemonta",
         "description": "Sreemonta Description",
         "location": {
           "lat": 22.75062,
